@@ -2,16 +2,16 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { TerminusModule } from '@nestjs/terminus';
 
 import { UsersModule } from './modules/users/users.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
+import { TerminusOptionsService } from './modules/terminus/terminus.service';
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:tYHeOqBnXvsNdk5s@api-qsb8w.gcp.mongodb.net/challenge_zoox',
+      process.env.MONGODB_URI,
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,
@@ -24,8 +24,9 @@ import { AuthModule } from './modules/auth/auth.module';
     PassportModule,
     UsersModule,
     AuthModule,
+    TerminusModule.forRootAsync({
+      useClass: TerminusOptionsService,
+    }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

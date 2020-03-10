@@ -9,7 +9,7 @@ Para iniciar o projeto, eu recomendo que você siga as inscrições [deste repos
 
   - Renomeie o arquivo `example.env` para `.env` e preencha as chaves que agora estão em branco. Aqui vai um exemplo de arquivo preenchido:
     ```
-      MONGODB_URI=mongodb://mongodb:27017/challenge_zoox
+      MONGODB_URI=mongodb://mongodb:27017/boilerplate_mongo
       PORT=3000
       SECRET=secret
     ```

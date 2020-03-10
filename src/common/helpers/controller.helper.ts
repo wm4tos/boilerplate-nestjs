@@ -14,11 +14,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { ResponseDto } from '../interfaces/response.dto';
 import { CommonMessages } from '../enums/messages.enum';
 
-export const Controller = (name = ''): MethodDecorator & ClassDecorator => {  
+export const Controller = (name = '', needAuth?: boolean): MethodDecorator & ClassDecorator => {  
   return applyDecorators(
     NestController(name),
     ApiTags(name),
-    ApiBearerAuth()
+    needAuth ? ApiBearerAuth() : (): boolean => false
   );
 };
 

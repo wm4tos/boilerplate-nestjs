@@ -1,16 +1,15 @@
-import { Post, Body, HttpStatus, Controller, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Post, Body, HttpStatus, NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 import { ResponseDto } from 'src/common/interfaces/response.dto';
 import { ApiResponse } from 'src/common/helpers/api-response.helper';
 import { CommonMessages } from 'src/common/enums/messages.enum';
+import { Controller } from 'src/common/helpers/controller.helper';
 
 import { AuthService } from './auth.service';
 import { AuthenticateDto } from './dtos/login.dto';
 import { AuthMessages } from './enums/messages.enum';
 
 @Controller('auth')
-@ApiTags('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService

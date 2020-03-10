@@ -1,17 +1,13 @@
-import { HttpStatus, Body, ConflictException, Controller } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { HttpStatus, Body, ConflictException } from '@nestjs/common';
 
 import { ResponseDto } from 'src/common/interfaces/response.dto';
-import { ApiResponse } from 'src/common/helpers/api-response.helper';
-import { CommonMessages } from 'src/common/enums/messages.enum';
 
 import { UsersService } from './users.service';
+import { Post, Controller } from 'src/common/helpers/controller.helper';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserMessages } from './enums/messages.enum';
-import { Post } from 'src/common/helpers/controller.helper';
 
 @Controller('users')
-@ApiTags('users')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService
@@ -31,7 +27,7 @@ export class UsersController {
   )
   async createUser(@Body() data: CreateUserDto): Promise<ResponseDto> {
     try {
-      const user = {} // await this.usersService.create(data);
+      const user = await this.usersService.create(data);
 
       return new ResponseDto(true, user, UserMessages.REGISTERED);
     } catch (error) {
